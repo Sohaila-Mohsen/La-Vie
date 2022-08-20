@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie/bloc/itemCountCubit/item_count_cubit.dart';
 import 'package:la_vie/core/components/button.dart';
 import 'package:la_vie/core/style/app_text_style/app_text_style.dart';
+import 'package:la_vie/core/utils/navigation.dart';
 import 'package:la_vie/model/product.dart';
+import 'package:la_vie/views/my_cart_screen.dart';
 
 class ProductCard extends StatelessWidget {
-  ProductCard({required this.product,required this.itemCount , Key? key}) : super(key: key);
+  ProductCard({required this.product, required this.itemCount, Key? key})
+      : super(key: key);
   //ProductCard(this.name, this.price, this.itemCount, this.imageUrl, {Key? key})
   //    : super(key: key);
 /*   String? imageUrl;
@@ -124,7 +127,10 @@ class ProductCard extends StatelessWidget {
                 bottom: 5,
                 left: 7,
                 child: AppButton(
-                    onPress: () {},
+                    onPress: () {
+                      NavigationUtils.navigateTo(
+                          context: context, destinationScreen: MyCartScreen());
+                    },
                     radius: 15,
                     width: (constraintsWidht / 2) - 40,
                     height: (constraintsHeight / 20),
