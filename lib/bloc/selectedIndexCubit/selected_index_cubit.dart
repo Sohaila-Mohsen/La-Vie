@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -8,7 +10,7 @@ class SelectedIndexCubit extends Cubit<SelectedIndexState> {
   int? selectedIndex = 2;
 
   SelectedIndexCubit({this.selectedIndex = 2}) : super(SelectedIndexInitial());
-  static SelectedIndexCubit get(context) => BlocProvider.of(context);
+  static SelectedIndexCubit get(context ) => BlocProvider.of(context);
 
   void changeIndex(int selected) {
     selectedIndex = selected;

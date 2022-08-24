@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie/services/sql_helper.dart';
 import 'package:meta/meta.dart';
 
 import '../../core/utils/sp_helper/cache_helper.dart';
@@ -11,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   static AuthCubit get(context) => BlocProvider.of(context);
 
-  Auth? authResponse;
+  var authResponse;
 
   Future signUp(
       String firstName, String lastName, String email, String password) async {
@@ -42,7 +45,13 @@ class AuthCubit extends Cubit<AuthState> {
       SharedPreferencesHelper.saveData(
           key: "accessToken", value: authResponse!.data!.accessToken);
     }).catchError((error) {
+      authResponse = error;
       print('error: ${error.toString()}');
     });
+  }
+
+  static logout() {
+    SharedPreferencesHelper.removeData(key: "accessToken");
+    SQLHelper.deleteItems();
   }
 }

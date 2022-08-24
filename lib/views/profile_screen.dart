@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie/bloc/userCubit/user_cubit.dart';
+import 'package:la_vie/core/components/user_menue.dart';
 import 'package:la_vie/core/components/update_user_tile.dart';
 import 'package:la_vie/core/style/app_colors/app_colors.dart';
 import 'package:la_vie/core/style/app_text_style/app_text_style.dart';
@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                   color: Colors.black.withOpacity(0.8),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       Row(
@@ -44,20 +44,13 @@ class ProfileScreen extends StatelessWidget {
                               onPressed: () {
                                 NavigationUtils.navigateTo(
                                     context: context,
-                                    destinationScreen: HomeScreen());
+                                    destinationScreen: const HomeScreen());
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
                               )),
-                          IconButton(
-                              iconSize: 25,
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.more_horiz_rounded,
-                                color: Colors.white,
-                                size: 25,
-                              )),
+                          const UserMenue(),
                         ],
                       ),
                       Stack(
@@ -89,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Text(
                         "${userCubit.user!.data!.firstName!} ${userCubit.user!.data!.lastName!}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
                             fontSize: 19),
@@ -113,7 +106,7 @@ class ProfileScreen extends StatelessWidget {
                                       .withOpacity(0.12),
                                   imagePath: "assets/img/badge.png",
                                   title:
-                                      "You have ${userCubit.user!.data!.userPoints} points"),
+                                      "You have ${(userCubit.user!.data!.userPoints == null) ? 0 : userCubit.user!.data!.userPoints} points"),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10.0),

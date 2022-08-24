@@ -29,7 +29,9 @@ class NotificationScreen extends StatelessWidget {
                       ? const Center(
                           child: CircularProgressIndicator(),
                         )
-                      : (userCubit.user!.data!.userNotification!.isNotEmpty)
+                      : (userCubit.user!.data!.userNotification == null ||
+                              userCubit
+                                  .user!.data!.userNotification!.isNotEmpty)
                           ? Expanded(
                               child: ListView.builder(
                                   itemCount: userCubit

@@ -1,14 +1,14 @@
 class UserResponse {
   String? type;
   String? message;
-  Data? data;
+  User? data;
 
   UserResponse({this.type, this.message, this.data});
 
   UserResponse.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new User.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +22,7 @@ class UserResponse {
   }
 }
 
-class Data {
+class User {
   String? userId;
   String? firstName;
   String? lastName;
@@ -30,10 +30,10 @@ class Data {
   String? imageUrl;
   String? address;
   String? role;
-  Null? userPoints;
+  int? userPoints;
   List<String?>? userNotification;
-
-  Data(
+ 
+  User(
       {this.userId,
       this.firstName,
       this.lastName,
@@ -44,7 +44,7 @@ class Data {
       this.userPoints,
       this.userNotification});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     firstName = json['firstName'];
     lastName = json['lastName'];
@@ -60,7 +60,7 @@ class Data {
       });
     }
   }
-  Data.fromJsonUp(Map<String, dynamic> json) {
+  User.fromJsonUp(Map<String, dynamic> json) {
     userId = json['userId'];
     firstName = json['firstName'];
     lastName = json['lastName'];

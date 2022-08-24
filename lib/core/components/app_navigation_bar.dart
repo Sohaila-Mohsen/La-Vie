@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie/bloc/selectedIndexCubit/selected_index_cubit.dart';
 import 'package:la_vie/core/style/app_colors/app_colors.dart';
 import 'package:la_vie/core/utils/custom_icons.dart';
-import 'package:la_vie/core/utils/navigation.dart';
+import 'package:la_vie/views/address_screen.dart';
+//import 'package:permission_handler/permission_handler.dart';
+import 'package:la_vie/views/blogs_screen.dart';
 import 'package:la_vie/views/home_screen.dart';
 import 'package:la_vie/views/scan_screen.dart';
 import '../../views/notification_screen.dart';
@@ -12,22 +14,21 @@ import '../../views/profile_screen.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     List<Function> actions = [
       () {
+        
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) =>  AddressScreen()),
             (route) => false);
-        
       },
       () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const ScannerScreen()),
-            (route) => false);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ScannerScreen()),
+        );
       },
       () {
         Navigator.pushAndRemoveUntil(
@@ -91,7 +92,10 @@ class AppNavigationBar extends StatelessWidget {
             ),
           ],
           onTap: (index) {
-            selectedIndexCubit.changeIndex(index);
+              if(index == 2 || index == 3)
+              selectedIndexCubit.changeIndex(index);
+              else
+                selectedIndexCubit.changeIndex(2);
             actions[index]();
           },
         );

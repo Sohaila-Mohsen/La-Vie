@@ -4,7 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:la_vie/bloc/authCubit/auth_cubit.dart';
 import 'package:la_vie/core/components/logo.dart';
 import 'package:la_vie/core/style/app_text_style/app_text_style.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+//import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import '../core/components/button.dart';
 import '../core/components/form_field.dart';
 import '../core/components/line_text_line.dart';
@@ -144,13 +144,23 @@ class SignUpScreen extends StatelessWidget {
                               onPress: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("111111111111");
-                                  authCubit.signUp(
-                                      _firstName.text,
-                                      _lastName.text,
-                                      _email.text,
-                                      _password.text);
+                                  authCubit
+                                      .signUp(_firstName.text, _lastName.text,
+                                          _email.text, _password.text)
+                                      .then((value) {
+                                    if (authCubit.authResponse!.type!
+                                        .contains("Success")) {
+                                      print("saving doneee");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeScreen()),
+                                      );
+                                    }
+
+                                    print("email : ${_email.text}");
+                                  });
                                 }
-                                print("email : ${_email.text}");
                               },
                               text: "Sign UP"),
                           Row(
@@ -189,7 +199,7 @@ class SignUpScreen extends StatelessWidget {
                               InkWell(
                                   onTap: () async {
                                     //print(this.firstName);
-                                    if (_formKey.currentState!.validate()) {
+                                    /* if (_formKey.currentState!.validate()) {
                                       await FacebookAuth.instance.accessToken;
                                       var facebookLogin = FacebookLogin();
                                       var result = await facebookLogin.logIn(
@@ -198,7 +208,7 @@ class SignUpScreen extends StatelessWidget {
                                           ]);
                                       var accessToken = result.accessToken;
                                       print("token === ${accessToken!.token}");
-                                    }
+                                    } */
                                   },
                                   child:
                                       Image.asset("assets/img/Facebook.png")),

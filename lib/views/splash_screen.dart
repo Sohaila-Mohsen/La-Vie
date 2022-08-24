@@ -44,6 +44,6 @@ class _SplachScreenState extends State<SplachScreen> {
         return LoginScreen();
       else
         return HomeScreen();
-    }), (route) => false);
+    }), (route) => true);
   }
 }
